@@ -1,0 +1,21 @@
+# Copyright 1999-2014 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/profiles/hardened/linux/package.use.mask,v 1.16 2014/10/11 05:07:07 radhermit Exp $
+
+# Tim Harder <radhermit@gentoo.org> (11 Oct 2014)
+# Skype doesn't work on hardened
+net-im/bitlbee skype
+
+sys-apps/hwloc gl
+
+sys-devel/gcc -hardened
+sys-libs/glibc -hardened
+
+# bug 407689
+media-tv/xbmc profile
+
+# Have no way to disable jit in esr release.
+=www-client/firefox-10* pgo
+
+# bug #468404
+net-analyzer/wireshark profile
