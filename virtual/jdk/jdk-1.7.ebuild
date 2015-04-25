@@ -50,25 +50,25 @@ version_tools=(
 )
 
 pkg_pretend() {
-        for t in "${tools[@]}"
-        do
-            which $t > /dev/null || die "Missing tool ${t} from JDK installation"
-        done
+	for t in "${tools[@]}"
+	do
+		which $t > /dev/null || die "Missing tool ${t} from JDK installation"
+	done
 
-        for vt in "${version_tools[@]}"
-        do
-            $vt -version 2>&1 | grep -q "${PV}" || die "${vt} version must be ${PV}"
-        done
+	for vt in "${version_tools[@]}"
+	do
+		$vt -version 2>&1 | grep -q "${PV}" || die "${vt} version must be ${PV}"
+	done
 }
 
 src_unpack() {
-        mkdir -p ${S}
+	mkdir -p ${S}
 }
 
 src_install() {
-        mkdir -p ${ED}/usr/bin
+	mkdir -p ${ED}/usr/bin
 	for t in "${tools[@]}"
 	do
-	    ln -s `which ${t}` ${ED}/usr/bin/${t}
+		ln -s `which ${t}` ${ED}/usr/bin/${t}
 	done
 }

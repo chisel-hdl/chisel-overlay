@@ -8,10 +8,10 @@ IUSE=""
 KEYWORDS="~amd64-linux"
 
 src_unpack() {
-        mkdir -p ${S}
+	mkdir -p ${S}
 }
 
 src_install() {
-        mkdir -p ${ED}/bin
-        ln -s /bin/bash ${ED}/bin/bash
+	mkdir -p ${ED}/bin
+	ln -s /bin/bash ${ED}/bin/bash
 }
