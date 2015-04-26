@@ -11,6 +11,10 @@ src_unpack() {
 	mkdir -p ${S}
 }
 
+pkg_pretend() {
+	test -e /usr/bin/python${PV} || die "Missing /usr/bin/python${PV}, can't link to system Python"
+}
+                
 src_install() {
 	mkdir -p ${ED}/usr/bin
 	cat >${ED}/usr/bin/python${PV} << EOF
