@@ -31,7 +31,7 @@ DSTLIBDIR=${D}/chisel-libs
 # @DESCRIPTION:
 # Compiles the Chisel Scala code, generating a jarfile.
 chisel_src_compile() {
-	python chiselc --sourceDir ${PKGWORKDIR} --workingDir ${PKGBUILDDIR} --dependencies ${DEPENDS} --scalacOptions ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar
+	python chiselc --sourceDir ${PKGWORKDIR} --buildDir ${PKGBUILDDIR} --pkgconfigDir ${DSTLIBDIR} --dependencies ${DEPENDS} --scalacOptions ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar
 }
 
 # @FUNCTION: chisel_src_test
