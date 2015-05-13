@@ -17,28 +17,38 @@
 # @EXAMPLE:
 # inherit chisel
 
-EXPORT_FUNCTIONS src_compile src_test src_install
+EXPORT_FUNCTIONS src_configure src_compile src_test src_install
 
 # Working directory for this package
 PKGWORKDIR=${WORKDIR}/${P}
+PKGSRCDIR=${WORKDIR}/${P}/src
 # Build directory for this package
 PKGBUILDDIR=${PKGWORKDIR}/build
 
 # Libraries directory in temporary destination
-DSTLIBDIR=${D}/chisel-libs
+DSTLIBDIR=${ED}/usr/share/chisel/libs
+
+# @FUNCTION: chisel_src_configure
+# @DESCRIPTION:
+# This does nothing.
+chisel_src_configure() {
+	:
+}
 
 # @FUNCTION: chisel_src_compile
 # @DESCRIPTION:
 # Compiles the Chisel Scala code, generating a jarfile.
 chisel_src_compile() {
-	python chiselc --sourceDir ${PKGWORKDIR} --buildDir ${PKGBUILDDIR} --pkgconfigDir ${DSTLIBDIR} --dependencies ${DEPENDS} --scalacOptions ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar
+	mkdir -p ${PKGBUILDDIR}
+	chiselc ${PKGSRCDIR} ${PKGBUILDDIR} --pkgsDir ${DSTLIBDIR} --dependencies ${DEPENDS} --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar || die "chiselc failedssXxf"
 }
 
 # @FUNCTION: chisel_src_test
 # @DESCRIPTION:
 # Runs any tests written with the Chisel testing frameworks.
 chisel_src_test() {
-# TODO: WRITE ME
+	:
+	# TODO: WRITE ME
 }
 
 # @FUNCTION: chisel_src_install
@@ -46,9 +56,7 @@ chisel_src_test() {
 # Installs the package, copying the jarfile to the global repository and
 # generating any necessary package descriptors.
 chisel_src_install() {
-	mkdir -p ${D}/chisel-libs
+	mkdir -p ${DSTLIBDIR}
 	cp ${PKGBUILDDIR}/${P}.jar ${DSTLIBDIR}
-	# TODO: support more dependencies
-	python chiselpkgdef --packageName ${PN} --packageVersion ${PV} --dependencies ${DEPENDS} --scalacOptions ${SCALACOPTS} --outputFile ${DSTLIBDIR}/${P}.pc
 }
 
