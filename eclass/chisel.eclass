@@ -57,6 +57,6 @@ chisel_src_test() {
 # generating any necessary package descriptors.
 chisel_src_install() {
 	mkdir -p ${DSTLIBDIR}
-	cp ${PKGBUILDDIR}/${P}.jar ${DSTLIBDIR}
+	cp ${PKGBUILDDIR}/${P}.jar ${DSTLIBDIR}/${P}.jar
 }
 
