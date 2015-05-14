@@ -6,6 +6,8 @@ DESCRIPTION="A hardware construction language supporting advanced design using h
 HOMEPAGE="https://chisel.eecs.berkeley.edu/"
 SLOT="${PV}/0"
 
+DEPEND="=dev-chisel/junit-4.12"
+
 EGIT_REPO_URI="git@github.com:ucb-bar/chisel.git"
 EGIT_COMMIT="v${PV}"
 

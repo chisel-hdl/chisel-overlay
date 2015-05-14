@@ -1,6 +1,7 @@
 EAPI="5"
 
 SRC_URI="https://search.maven.org/remotecontent?filepath=junit/junit/${PV}/junit-${PV}.jar"
+DEPEND="=dev-chisel/hamcrest-core-1.3"
 
 inherit chisel-jar
 
