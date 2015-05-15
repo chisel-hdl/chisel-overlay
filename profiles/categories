@@ -25,6 +25,7 @@ app-shells
 app-text
 app-vim
 app-xemacs
+chisel-util
 dev-ada
 dev-cpp
 dev-db
