@@ -40,7 +40,7 @@ chisel_src_configure() {
 # Compiles the Chisel Scala code, generating a jarfile.
 chisel_src_compile() {
 	mkdir -p ${PKGBUILDDIR}
-	chiselc ${PKGSRCDIR} ${PKGBUILDDIR} --pkgsDir ${DSTLIBDIR} --dependencies ${DEPENDS} --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar || die "chiselc failedssXxf"
+	chiselc ${PKGSRCDIR} ${PKGBUILDDIR} --portagePkgDepends "${DEPEND}" --portagePkgDbDir ${EPREFIX}/var/db/pkg --portagePkgJarDir ${EPREFIX}/usr/share/chisel/libs --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar || die "chiselc failed"
 }
 
 # @FUNCTION: chisel_src_test

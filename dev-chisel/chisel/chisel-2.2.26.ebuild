@@ -7,7 +7,7 @@ HOMEPAGE="https://chisel.eecs.berkeley.edu/"
 SLOT="${PV}/0"
 KEYWORDS="~*"
 
-DEPEND="=dev-chisel/junit-4.12"
+DEPEND="=dev-chisel/junit-4.12 =dev-chisel/scalatest210-2.2.5"
 
 EGIT_REPO_URI="git@github.com:ucb-bar/chisel.git"
 EGIT_COMMIT="v${PV}"
