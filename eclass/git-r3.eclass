@@ -29,7 +29,9 @@ EXPORT_FUNCTIONS src_unpack
 if [[ ! ${_GIT_R3} ]]; then
 
 if [[ ! ${_INHERITED_BY_GIT_2} ]]; then
-	DEPEND=">=dev-vcs/git-1.8.2.1"
+	:
+	#DEPEND=">=dev-vcs/git-1.8.2.1"
+	# TODO: add this as a dependency to check for system git
 fi
 
 # @ECLASS-VARIABLE: EGIT_CLONE_TYPE
