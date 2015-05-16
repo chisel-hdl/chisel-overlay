@@ -29,5 +29,5 @@ EOF
 	chmod oug=rx ${ED}/usr/bin/python${PMV}
 
 	mkdir -p ${ED}/lib/python${PMV}/site-packages
-        touch ${ED}/lib/python${PMV}/site-packages/.keep
+	touch ${ED}/lib/python${PMV}/site-packages/.keep
 }
