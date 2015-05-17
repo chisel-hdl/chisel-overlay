@@ -43,6 +43,9 @@ PKGBUILDDIR=${PKGWORKDIR}/build
 # Libraries directory in temporary destination
 DSTLIBDIR=${ED}/usr/share/chisel/libs
 
+# Main class for the generated jar (empty is non-excutable)
+JAR_ENTRYPOINT=""
+
 # All Chisel packages need chiselc.  In addition, the user is expected
 # to set CHISEL_LIBRARY_DEPENDENCIES to the list of dependencies that
 # chiselc is meant to figure out how to deal with.
@@ -60,7 +63,7 @@ chisel_src_configure() {
 # Compiles the Chisel Scala code, generating a jarfile.
 chisel_src_compile() {
 	mkdir -p ${PKGBUILDDIR}
-	chiselc ${PKGWORKDIR}/${SRC_SUBPATH} ${PKGBUILDDIR} --portagePkgDepends "${CHISEL_LIBRARY_DEPENDENCIES}" --portagePkgDbDir ${EPREFIX}/var/db/pkg --portagePkgJarDir ${EPREFIX}/usr/share/chisel/libs --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar || die "chiselc failed"
+	chiselc ${PKGWORKDIR}/${SRC_SUBPATH} ${PKGBUILDDIR} --portagePkgDepends "${CHISEL_LIBRARY_DEPENDENCIES}" --portagePkgDbDir ${EPREFIX}/var/db/pkg --portagePkgJarDir ${EPREFIX}/usr/share/chisel/libs --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar --jarEntryPoint ${JAR_ENTRYPOINT} || die "chiselc failed"
 }
 
 # @FUNCTION: chisel_src_test
