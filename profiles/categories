@@ -28,6 +28,7 @@ app-xemacs
 chisel-util
 chisel-libs
 dev-ada
+dev-chisel
 dev-cpp
 dev-db
 dev-dotnet
