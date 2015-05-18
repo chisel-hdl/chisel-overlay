@@ -19,12 +19,15 @@
 # ebuilds may also define:
 # - SRC_SUBPATH, the relative path from the repository root where the source 
 #   files are located. This defaults to sbt's convention, "src/main/scala".
+# - RESOURCES_SUBPATH, the relative path from the repository root where
+#   resources to be put in the JAR are located. This defaults to empty.
 # - SCALACOPTS, which is a list of options passed to the scalac compiler.
 # - CHISEL_LIBRARY_DEPENDENCIES, which is a list of Chisel library dependencies
 #   in Portage DEPEND style. Currently, this MUST have an exact version
 #   associated with it (example: "=dev-lang/chisel-2.2.26") because of
 #   limitations in chiselc. Note that just using DEPEND will cause compilation
 #   to fail since chiselc is not aware of DEPEND.
+# - JAR_ENTRYPOINT, which specifies a main class to manifest into the JAR.
 #
 # The use of any other variables are unsupported and updates may break your 
 # code.
@@ -36,9 +39,11 @@ EXPORT_FUNCTIONS src_configure src_compile src_test src_install
 
 # Working directory for this package
 PKGWORKDIR=${WORKDIR}/${P}
-SRC_SUBPATH="src/main/scala"
 # Build directory for this package
 PKGBUILDDIR=${PKGWORKDIR}/build
+
+SRC_SUBPATH="src/main/scala"
+RESOURCES_SUBPATH=""
 
 # Libraries directory in temporary destination
 DSTLIBDIR=${ED}/usr/share/chisel/libs
@@ -62,8 +67,18 @@ chisel_src_configure() {
 # @DESCRIPTION:
 # Compiles the Chisel Scala code, generating a jarfile.
 chisel_src_compile() {
+	local OPTIONAL_ARGS=""
+	if  [[ ! -z  ${JAR_ENTRYPOINT} ]] 
+	then
+		OPTIONAL_ARGS="${OPTIONAL_ARGS} --jarEntryPoint ${JAR_ENTRYPOINT}"
+	fi
+	if  [[ ! -z  ${RESOURCES_SUBPATH} ]] 
+	then
+		OPTIONAL_ARGS="${OPTIONAL_ARGS} --resourceDirs ${PKGWORKDIR}/${RESOURCES_SUBPATH}"
+	fi
+
 	mkdir -p ${PKGBUILDDIR}
-	chiselc ${PKGWORKDIR}/${SRC_SUBPATH} ${PKGBUILDDIR} --portagePkgDepends "${CHISEL_LIBRARY_DEPENDENCIES}" --portagePkgDbDir ${EPREFIX}/var/db/pkg --portagePkgJarDir ${EPREFIX}/usr/share/chisel/libs --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar --jarEntryPoint ${JAR_ENTRYPOINT} || die "chiselc failed"
+	chiselc ${PKGWORKDIR}/${SRC_SUBPATH} ${PKGBUILDDIR}  --portagePkgDepends "${CHISEL_LIBRARY_DEPENDENCIES}" --portagePkgDbDir ${EPREFIX}/var/db/pkg --portagePkgJarDir ${EPREFIX}/usr/share/chisel/libs --scalacOpts ${SCALACOPTS} --outputJar ${PKGBUILDDIR}/${P}.jar ${OPTIONAL_ARGS} || die "chiselc failed"
 }
 
 # @FUNCTION: chisel_src_test

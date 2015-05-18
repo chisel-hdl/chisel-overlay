@@ -8,4 +8,5 @@ SLOT="${PV}/0"
 KEYWORDS="amd64 ~amd64-linux"
 EGIT_REPO_URI="git@github.com:ucb-bar/chisel.git"
 
+RESOURCES_SUBPATH="src/main/resources"
 SCALACOPTS="deprecation feature language:reflectiveCalls language:implicitConversions language:existentials"
