@@ -6,7 +6,7 @@ SRC_URI=""
 
 PMV=2.7 # Python Major Version
 SLOT="${PMV}/0"
-IUSE=""
+IUSE="+threads"
 KEYWORDS="~amd64-linux"
 
 src_unpack() {
@@ -16,6 +16,7 @@ src_unpack() {
 pkg_pretend() {
 	test -e /usr/bin/python${PMV} || die "Missing /usr/bin/python${PMV}, can't link to system Python"
 	/usr/bin/python${PMV} -c "import sys; exit(sys.version_info[2] < int(\"${PV}\"[4:]))" || die "Python should be ${PV} or newer"
+        use threads && /usr/bin/python${PMV} -m threading || die "Python must support threads"
 }
 
 src_install() {
