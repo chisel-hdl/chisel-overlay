@@ -7,15 +7,11 @@ SRC_URI="https://github.com/palmer-dabbelt/${PN}/archive/v${PV}.tar.gz -> ${P}.t
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 amd64-linux arm"
+KEYWORDS="             amd64  amd64-linux  arm"
+KEYWORDS="${KEYWORDS} ~amd64 ~amd64-linux ~arm"
 IUSE="scala"
 
-RDEPEND="dev-util/pkgconfig
-         dev-util/strace
-	 sys-devel/make
-         sys-devel/gcc
-         sys-libs/talloc
-         scala? ( dev-lang/scala )
+RDEPEND="scala? ( dev-lang/scala )
          "
 
 DEPEND="${RDEPEND}"
